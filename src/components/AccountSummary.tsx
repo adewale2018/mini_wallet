@@ -1,3 +1,5 @@
+import useStore from '../store/useStore';
+
 const AccountSummary: React.FC = () => {
   return (
     <div>
