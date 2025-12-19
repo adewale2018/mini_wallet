@@ -2,8 +2,8 @@
   {
     "id": "txn-1",
     "accountId": "main",
-    "date": "2024-03-15T10:30:00Z",
-    "merchant": "Starbucks",
+    "date": "2024-12-17T10:30:00Z",
+    "merchant": "Bite More",
     "category": "Food & Drink",
     "amount": 5.75,
     "type": "debit",
@@ -12,8 +12,8 @@
   {
     "id": "txn-2",
     "accountId": "main",
-    "date": "2024-03-14T09:15:00Z",
-    "merchant": "Employer Inc",
+    "date": "2024-12-14T09:17:00Z",
+    "merchant": "9ja Settlement",
     "category": "Income",
     "amount": 3000.00,
     "type": "credit",
@@ -22,7 +22,7 @@
   {
     "id": "txn-3",
     "accountId": "savings",
-    "date": "2024-03-13T14:20:00Z",
+    "date": "2024-12-13T18:20:00Z",
     "merchant": "Bank Interest",
     "category": "Interest",
     "amount": 12.34,
@@ -32,7 +32,7 @@
   {
     "id": "txn-4",
     "accountId": "main",
-    "date": "2024-03-12T08:45:00Z",
+    "date": "2024-12-18T08:45:00Z",
     "merchant": "Transfer to Savings",
     "category": "Transfer",
     "amount": 200.00,
@@ -43,7 +43,7 @@
   {
     "id": "txn-5",
     "accountId": "savings",
-    "date": "2024-03-12T08:45:00Z",
+    "date": "2024-12-19T08:45:00Z",
     "merchant": "Transfer from Main",
     "category": "Transfer",
     "amount": 200.00,

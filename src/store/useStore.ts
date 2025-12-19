@@ -31,12 +31,14 @@ const initialFilters: Filters = {
 };
 
 const useStore = create<StoreState>((set, get) => ({
+  // initial state
   accounts: [],
   transactions: [],
   filters: initialFilters,
   isLoading: false,
   error: null,
 
+  // load initial data
   loadData: async () => {
     set({ isLoading: true, error: null });
     try {
