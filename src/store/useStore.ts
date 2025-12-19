@@ -1,6 +1,6 @@
-import { Account, Filters, Transaction, TransferRequest } from "../types";
-
-import api from "../services/api";
+import type { Account } from "../types/account";
+import type { Transaction } from "../types/transaction";
+import { api } from "../services/api";
 import { create } from "zustand";
 
 interface StoreState {

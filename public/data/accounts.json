@@ -3,14 +3,14 @@
     "id": "main",
     "name": "Main",
     "type": "main",
-    "balance": 5000.00,
+    "balance": 15000.00,
     "color": "#3b82f6"
   },
   {
     "id": "savings",
     "name": "Savings",
     "type": "savings",
-    "balance": 15000.00,
+    "balance": 3000.00,
     "color": "#10b981"
   }
 ]
