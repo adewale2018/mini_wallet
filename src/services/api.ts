@@ -1,6 +1,7 @@
-import { Account, Filters, Transaction, TransferRequest } from "../types";
-// network delay simulation
+import type { Account } from "../types/account";
+import type { Transaction } from "../types/transaction";
 
+// network delay simulation
 const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
 export const api = {
