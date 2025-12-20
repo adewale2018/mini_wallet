@@ -1,7 +1,6 @@
 import { ArrowDown, ArrowUp, RefreshCw } from "lucide-react";
 
 import { format } from "date-fns";
-// src/components/TransactionList.tsx
 import useStore from "../store/useStore";
 
 const TransactionList = () => {

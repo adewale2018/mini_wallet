@@ -1,16 +1,10 @@
-import { DollarSign, TrendingUp, Wallet } from "lucide-react";
-
+import { DollarSign } from "lucide-react";
 import SingleAccount from "./SingleAccount";
 import useStore from "../store/useStore";
 
 const AccountSummary = () => {
   const { accounts } = useStore();
-
-  // This is temporary until we have a derived state in the store
-  const totalBalance = accounts.reduce(
-    (sum, account) => sum + account.balance,
-    0
-  );
+   const totalBalance = useStore(state => state.getTotalBalance());
   return (
     <section className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
       {/* Total Balance Card */}

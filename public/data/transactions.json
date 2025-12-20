@@ -35,7 +35,7 @@
     "date": "2024-12-18T08:45:00Z",
     "merchant": "Transfer to Savings",
     "category": "Transfer",
-    "amount": 200.00,
+    "amount": 500.00,
     "type": "transfer",
     "transferToAccountId": "savings",
     "status": "completed"
