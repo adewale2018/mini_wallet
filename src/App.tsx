@@ -1,13 +1,14 @@
-import { AlertCircle, ArrowLeftRight, Home, RefreshCw } from "lucide-react";
+import { AlertCircle, RefreshCw } from "lucide-react";
+import { Navigate, Route, Routes } from "react-router-dom";
 
-import AccountSummary from "./components/AccountSummary";
-import Filters from "./components/Filters";
-import TransactionsList from "./components/TransactionList";
+import Dashboard from "./pages/Dashboard";
+import Navigation from "./components/Navigation";
+import TransferPage from "./pages/TransferPage";
 import { useEffect } from "react";
 import useStore from "./store/useStore";
 
 function App() {
-  const { loadData, isLoading, error } = useStore();
+  const { loadData, error } = useStore();
 
   useEffect(() => {
     loadData();
@@ -35,11 +36,12 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <AccountSummary />
-        <Filters />
-        <TransactionsList />
-      </div>
+      <Navigation />
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/transfer" element={<TransferPage />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
     </div>
   );
 }

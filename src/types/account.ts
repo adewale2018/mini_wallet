@@ -3,4 +3,5 @@ export interface Account {
   name: string;
   type: "main" | "savings";
   balance: number;
+  color: string;
 }
