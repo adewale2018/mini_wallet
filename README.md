@@ -1,73 +1,47 @@
-# React + TypeScript + Vite
+# Mini Wallet Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React-based mini banking dashboard with real-time transactions, account management, and money transfer capabilities.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Real-time Transaction Dashboard**
+- View all transactions with running balance
+- Filter by category, and search
+- Responsive design (360px to desktop)
 
-## React Compiler
+**Secure Money Transfers**
+- Transfer between accounts with validation
+- Form validation (positive decimals, sufficient balance)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+**State Management**
+- Built with Zustand for predictable state
+- Optimistic updates for smooth UX
 
-## Expanding the ESLint configuration
+**Security & Best Practices**
+- No sensitive data logged in console
+- Disabled submit during processing
+- Clear error messages without exposing internals
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+**Accessibility**
+- Semantic HTML elements
+- Keyboard navigation support
+- ARIA labels where needed
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Tech Stack
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- **React 19** with TypeScript
+- **Vite** for fast builds
+- **Zustand** for state management
+- **Tailwind CSS** for styling
+- **React Router** for navigation
+- **date-fns** for date formatting
+- **Lucide React** for icons
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Setup Instructions
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+1. **Clone and install:**
+```bash
+git clone <https://github.com/adewale2018/mini_wallet.git>
+cd mini_wallet
+npm install
+then run `npm run dev` to start the application
