@@ -1,10 +1,55 @@
 import { ArrowDown, ArrowUp, RefreshCw } from "lucide-react";
+import { useMemo, useState } from "react";
 
+import { Input } from "./ui/Input";
 import { format } from "date-fns";
+import { useShallow } from "zustand/react/shallow";
 import useStore from "../store/useStore";
 
 const TransactionList = () => {
-  const { accounts, isLoading, transactions } = useStore();
+  const { isLoading } = useStore();
+  const { transactions, accounts } = useStore(
+    useShallow((state) => ({
+      transactions: state.transactions,
+      accounts: state.accounts,
+    }))
+  );
+
+  const [searchTerm, setSearchTerm] = useState("");
+  const [category, setCategory] = useState("all");
+
+  const filtered = useMemo(() => {
+    let list = [...transactions];
+
+    if (searchTerm) {
+      list = list.filter((t) =>
+        t.merchant.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    if (category !== "all") {
+      list = list.filter((t) => t.category === category);
+    }
+
+    // Sort newest first
+    list.sort(
+      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    );
+
+    // Calculate running balance per account
+    const balances: Record<string, number> = {};
+    accounts.forEach((a) => (balances[a.id] = a.balance));
+
+    return list.map((t) => {
+      const prev = balances[t.accountId];
+      const delta =
+        t.type === "debit" ? -t.amount : t.type === "credit" ? t.amount : 0;
+      balances[t.accountId] += delta;
+      return { ...t, runningBalance: balances[t.accountId] };
+    });
+  }, [transactions, accounts, searchTerm, category]);
+
+  const categories = ["all", "income", "transfer", "food", "transport"];
 
   const getAccountName = (accountId: string) => {
     return accounts.find((a) => a.id === accountId)?.name || accountId;
@@ -29,6 +74,30 @@ const TransactionList = () => {
 
   return (
     <div className="bg-white rounded-xl shadow overflow-hidden">
+      <div className="p-6 border-b">
+        <div className="flex flex-col md:flex-row gap-4">
+          <Input
+            type="text"
+            placeholder="Search merchant..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="px-4 py-2 border rounded-lg flex-1"
+          />
+          <select
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            className="px-4 py-2 border rounded-lg"
+          >
+            {categories.map((c) => (
+              <option key={c} value={c}>
+                {c === "all"
+                  ? "All Categories"
+                  : c.charAt(0).toUpperCase() + c.slice(1)}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
       <div className="overflow-x-auto">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
@@ -48,13 +117,16 @@ const TransactionList = () => {
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Amount
               </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                Running Balance
+              </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Status
               </th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {transactions?.map((transaction) => {
+            {filtered?.map((transaction) => {
               const isDebit = transaction.type === "debit";
               const isCredit = transaction.type === "credit";
               const isTransfer = transaction.type === "transfer";
@@ -76,7 +148,7 @@ const TransactionList = () => {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                      {transaction.category}
+                      {transaction?.category}
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
@@ -106,6 +178,9 @@ const TransactionList = () => {
                         {transaction.amount.toFixed(2)}
                       </span>
                     </div>
+                  </td>
+                  <td className="px-6 py-4 text-sm font-medium">
+                    ${transaction?.runningBalance.toFixed(2)}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <span

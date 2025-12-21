@@ -1,7 +1,6 @@
 import { AlertCircle, RefreshCw } from "lucide-react";
 
 import AccountSummary from "../components/AccountSummary";
-import Filters from "../components/Filters";
 import TransactionList from "../components/TransactionList";
 import { useEffect } from "react";
 import useStore from "../store/useStore";
@@ -38,7 +37,6 @@ function Dashboard() {
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <AccountSummary />
-        <Filters />
         <TransactionList />
       </div>
     </div>
