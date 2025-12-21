@@ -1,12 +1,10 @@
-import { ArrowRightLeft, DollarSign } from "lucide-react";
-
+import { ArrowRightLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import SingleAccount from "./SingleAccount";
 import useStore from "../store/useStore";
 
 const AccountSummary = () => {
   const { accounts } = useStore();
-  const totalBalance = useStore((state) => state.getTotalBalance());
   return (
     <section className="">
       <h1 className="text-3xl font-bold text-center mb-4 text-orange-800">

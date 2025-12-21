@@ -1,7 +1,7 @@
 import { ArrowDown, ArrowUp, RefreshCw } from "lucide-react";
 import { useMemo, useState } from "react";
 
-import { Input } from "./ui/Input";
+import { Input } from "@/components/ui/input";
 import { format } from "date-fns";
 import { useShallow } from "zustand/react/shallow";
 import useStore from "../store/useStore";
@@ -41,7 +41,7 @@ const TransactionList = () => {
     accounts.forEach((a) => (balances[a.id] = a.balance));
 
     return list.map((t) => {
-      const prev = balances[t.accountId];
+      // const prev = balances[t.accountId];
       const delta =
         t.type === "debit" ? -t.amount : t.type === "credit" ? t.amount : 0;
       balances[t.accountId] += delta;

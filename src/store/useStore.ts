@@ -1,7 +1,6 @@
 import { createJSONStorage, persist } from "zustand/middleware";
 
 import type { Account } from "../types/account";
-import type { Filters } from "../types/filters";
 import type { Transaction } from "../types/transaction";
 import type { TransferRequest } from "../types/transfer";
 import { api } from "../services/api";
