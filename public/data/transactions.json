@@ -28,27 +28,5 @@
     "amount": 12.34,
     "type": "credit",
     "status": "completed"
-  },
-  {
-    "id": "txn-4",
-    "accountId": "main",
-    "date": "2024-12-18T08:45:00Z",
-    "merchant": "Transfer to Savings",
-    "category": "transfer",
-    "amount": 500.00,
-    "type": "transfer",
-    "transferToAccountId": "savings",
-    "status": "completed"
-  },
-  {
-    "id": "txn-5",
-    "accountId": "savings",
-    "date": "2024-12-19T08:45:00Z",
-    "merchant": "Transfer from Main",
-    "category": "transfer",
-    "amount": 200.00,
-    "type": "transfer",
-    "transferToAccountId": "main",
-    "status": "completed"
   }
 ]

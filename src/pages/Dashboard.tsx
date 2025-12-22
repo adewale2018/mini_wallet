@@ -1,7 +1,7 @@
 import { AlertCircle, RefreshCw } from "lucide-react";
 
 import AccountSummary from "../components/AccountSummary";
-import TransactionList from "../components/TransactionList";
+import TransactionList from "../components/transaction/TransactionList";
 import { useEffect } from "react";
 import useStore from "../store/useStore";
 

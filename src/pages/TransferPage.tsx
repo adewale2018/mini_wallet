@@ -16,7 +16,7 @@ function TransferPage() {
           <div className="lg:col-span-2">
             <TransferForm />
           </div>
-          <div className="space-y-6">
+          <div className="space-y-6 lg:mt-20">
             <div className="bg-white rounded-xl shadow p-6 border border-gray-200">
               <h3 className="text-lg font-semibold text-orange-900 mb-4">
                 Transfer Guidelines
@@ -46,9 +46,9 @@ function TransferPage() {
               <p className="text-orange-700 text-sm mb-4">
                 Contact support if you encounter any issues with transfers.
               </p>
-              <button className="text-sm text-orange-600 hover:text-orange-800 font-medium">
+              <a href="mailto:humanresources@9jasettlement.com" className="text-sm text-orange-600 hover:text-orange-800 font-medium">
                 Contact Support →
-              </button>
+              </a>
             </div>
           </div>
         </div>

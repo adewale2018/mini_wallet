@@ -1,5 +1,5 @@
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { AlertCircle, ArrowRight, CheckCircle, Loader2 } from "lucide-react";
+import { AlertCircle, ArrowLeft, ArrowRight, CheckCircle, Loader2 } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-import { Badge } from "@/components/ui/badge";
+import AccountCard from "./AccountCard";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -47,13 +47,11 @@ const TransferForm = () => {
 
       if (type === "from") {
         newData.fromAccountId = accountId;
-        // If selecting same as "to", clear "to"
         if (accountId === prev.toAccountId) {
           newData.toAccountId = "";
         }
       } else {
         newData.toAccountId = accountId;
-        // If selecting same as "from", clear "from"
         if (accountId === prev.fromAccountId) {
           newData.fromAccountId = "";
         }
@@ -103,7 +101,6 @@ const TransferForm = () => {
     try {
       await transferMoney(formData);
       setSuccess(true);
-      // Reset amount and description only
       setFormData((prev) => ({
         ...prev,
         amount: 0,
@@ -124,65 +121,13 @@ const TransferForm = () => {
 
   const fromAccount = accounts.find((a) => a.id === formData.fromAccountId);
   const toAccount = accounts.find((a) => a.id === formData.toAccountId);
-
-  // Account Card Component with button element
-  const AccountCard = ({
-    account,
-    selected,
-    onSelect,
-    disabled,
-    type,
-  }: {
-    account: any;
-    selected: boolean;
-    onSelect: () => void;
-    disabled: boolean;
-    type: "from" | "to";
-  }) => (
-    <button
-      type="button"
-      onClick={onSelect}
-      disabled={disabled}
-      className={`w-full text-left p-0 border-2 rounded-lg transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 ${
-        selected
-          ? type === "from"
-            ? "border-blue-500 bg-blue-50 focus:ring-blue-500"
-            : "border-green-500 bg-green-50 focus:ring-green-500"
-          : "border-gray-200 bg-white"
-      } ${
-        disabled
-          ? "opacity-50 cursor-not-allowed"
-          : "cursor-pointer hover:border-gray-300"
-      }`}
-    >
-      <div className="p-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div
-              className="w-3 h-3 rounded-full"
-              style={{ backgroundColor: account.color }}
-            />
-            <div>
-              <div className="font-medium text-gray-900">{account.name}</div>
-              <Badge variant="outline" className="mt-1">
-                {account.type}
-              </Badge>
-            </div>
-          </div>
-          <div className="text-right">
-            <div className="text-lg font-bold text-gray-900">
-              ${account.balance.toFixed(2)}
-            </div>
-            <div className="text-xs text-gray-500">
-              {type === "from" ? "Available" : "Current"}
-            </div>
-          </div>
-        </div>
-      </div>
-    </button>
-  );
-
   return (
+    <section>
+      <div className="mb-6 flex items-center gap-4 cursor-pointer" onClick={() => window.history.back()}>
+      <ArrowLeft className="w-5 h-5 text-orange-600 animate-bounce" />
+      <span className="text-gray-600 border-b-4 hover:border-b-2 transition-all border-orange-600 hover:border-orange-700">Back to Dashboard</span>
+      </div>
+    <h2 className="text-2xl font-semibold text-gray-900">Transfer Funds</h2>
     <Card className="w-full">
       <CardHeader>
         <div className="flex items-center">
@@ -203,7 +148,7 @@ const TransferForm = () => {
           <div className="space-y-3">
             <Label>From Account</Label>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {accounts.map((account) => (
+              {accounts?.map((account) => (
                 <AccountCard
                   key={`from-${account.id}`}
                   account={account}
@@ -342,6 +287,7 @@ const TransferForm = () => {
         </form>
       </CardContent>
     </Card>
+    </section>
   );
 };
 

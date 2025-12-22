@@ -8,4 +8,5 @@ export interface Transaction {
   type: "debit" | "credit" | "transfer";
   status: "pending" | "completed" | "failed";
   transferToAccountId?: string; // This applies to transfers only
+  runningBalance?: number;
 }
