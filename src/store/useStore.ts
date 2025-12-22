@@ -164,14 +164,6 @@ const useStore = create<StoreState>()(
           throw error;
         }
       },
-
-      getTotalBalance: () => {
-        const state = get();
-        return state.accounts.reduce(
-          (sum, account) => sum + account.balance,
-          0
-        );
-      },
     }),
     {
       name: "mini-wallet-storage",

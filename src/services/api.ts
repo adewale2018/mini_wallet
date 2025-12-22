@@ -26,10 +26,6 @@ export const api = {
   async transfer(request: TransferRequest): Promise<void> {
     await delay(1000);
     // Simulate random failure (10% chance)
-    if (Math.random() < 0.1) {
-      throw new Error('Transfer failed due to network error');
-    }
-    // In a real app, this would POST to an API
     console.log('Transfer successful:', request);
   },
 };
