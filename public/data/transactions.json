@@ -2,7 +2,7 @@
   {
     "id": "txn-1",
     "accountId": "main",
-    "date": "2024-12-17T10:30:00Z",
+    "date": "2025-12-24",
     "merchant": "Bite More",
     "category": "food",
     "amount": 5.75,
@@ -12,20 +12,10 @@
   {
     "id": "txn-2",
     "accountId": "main",
-    "date": "2024-12-14T09:17:00Z",
+    "date": "2025-12-23",
     "merchant": "9ja Settlement",
     "category": "income",
     "amount": 3000.00,
-    "type": "credit",
-    "status": "completed"
-  },
-  {
-    "id": "txn-3",
-    "accountId": "savings",
-    "date": "2024-12-13T18:20:00Z",
-    "merchant": "Bank Interest",
-    "category": "interest",
-    "amount": 12.34,
     "type": "credit",
     "status": "completed"
   }
