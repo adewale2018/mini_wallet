@@ -2,7 +2,7 @@
   {
     "id": "txn-1",
     "accountId": "main",
-    "date": "2025-12-24",
+    "date": "2025-12-19",
     "merchant": "Bite More",
     "category": "food",
     "amount": 5.75,
@@ -12,10 +12,10 @@
   {
     "id": "txn-2",
     "accountId": "main",
-    "date": "2025-12-23",
-    "merchant": "9ja Settlement",
+    "date": "2025-12-20",
+    "merchant": "9ja Settlement Salary",
     "category": "income",
-    "amount": 3000.00,
+    "amount": 2500.00,
     "type": "credit",
     "status": "completed"
   }
