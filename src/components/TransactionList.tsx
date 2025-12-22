@@ -1,6 +1,7 @@
 import { ArrowDown, ArrowUp, RefreshCw } from "lucide-react";
 import { useMemo, useState } from "react";
 
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { format } from "date-fns";
 import { useShallow } from "zustand/react/shallow";
@@ -17,6 +18,8 @@ const TransactionList = () => {
 
   const [searchTerm, setSearchTerm] = useState("");
   const [category, setCategory] = useState("all");
+  const [dateStart, setDateStart] = useState("");
+  const [dateEnd, setDateEnd] = useState("");
 
   const filtered = useMemo(() => {
     let list = [...transactions];
@@ -29,6 +32,20 @@ const TransactionList = () => {
 
     if (category !== "all") {
       list = list.filter((t) => t.category === category);
+    }
+
+    // Filter by date range
+    if (dateStart || dateEnd) {
+      list = list.filter((t) => {
+        const txDate = new Date(t.date);
+        if (dateStart && txDate < new Date(dateStart)) return false;
+        if (dateEnd) {
+          const endDate = new Date(dateEnd);
+          endDate.setHours(23, 59, 59, 999); // Include full end day
+          if (txDate > endDate) return false;
+        }
+        return true;
+      });
     }
 
     // Sort newest first
@@ -47,12 +64,22 @@ const TransactionList = () => {
       balances[t.accountId] += delta;
       return { ...t, runningBalance: balances[t.accountId] };
     });
-  }, [transactions, accounts, searchTerm, category]);
+  }, [transactions, accounts, searchTerm, category, dateStart, dateEnd]);
 
-  const categories = ["all", "income", "transfer", "food", "transport"];
+  const categories = [
+    "all",
+    ...Array.from(new Set(transactions.map((t) => t.category))),
+  ];
 
   const getAccountName = (accountId: string) => {
     return accounts.find((a) => a.id === accountId)?.name || accountId;
+  };
+
+  const clearFilters = () => {
+    setSearchTerm("");
+    setCategory("all");
+    setDateStart("");
+    setDateEnd("");
   };
 
   if (isLoading) {
@@ -73,29 +100,72 @@ const TransactionList = () => {
   }
 
   return (
-    <div className="bg-white rounded-xl shadow overflow-hidden">
-      <div className="p-6 border-b">
-        <div className="flex flex-col md:flex-row gap-4">
-          <Input
-            type="text"
-            placeholder="Search merchant..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="px-4 py-2 border rounded-lg flex-1"
-          />
-          <select
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            className="px-4 py-2 border rounded-lg"
+    <section className="bg-white rounded-xl shadow overflow-hidden">
+      <div className="p-6 border-b bg-gray-50">
+        <h2 className="text-lg font-semibold mb-4 text-orange-700">Filters</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Search Merchant
+            </label>
+            <Input
+              type="text"
+              placeholder="e.g. Amazon"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Category
+            </label>
+            <select
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              className="capitalize w-full px-3 py-2 border border-gray-300 rounded-lg"
+            >
+              {categories.map((c) => (
+                <option className="uppercase" key={c} value={c}>
+                  {c === "all" ? "All Categories" : c}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Start Date
+            </label>
+            <Input
+              type="date"
+              value={dateStart}
+              onChange={(e) => setDateStart(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              End Date
+            </label>
+            <input
+              type="date"
+              value={dateEnd}
+              onChange={(e) => setDateEnd(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+        </div>
+
+        <div className="mt-4 flex justify-end">
+          <Button
+            onClick={clearFilters}
+            className="cursor-pointer text-sm text-white hover:text-gray-300 underline"
           >
-            {categories.map((c) => (
-              <option key={c} value={c}>
-                {c === "all"
-                  ? "All Categories"
-                  : c.charAt(0).toUpperCase() + c.slice(1)}
-              </option>
-            ))}
-          </select>
+            Clear all filters
+          </Button>
         </div>
       </div>
       <div className="overflow-x-auto">
@@ -202,7 +272,7 @@ const TransactionList = () => {
           </tbody>
         </table>
       </div>
-    </div>
+    </section>
   );
 };
 
