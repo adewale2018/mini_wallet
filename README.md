@@ -6,7 +6,7 @@ A React-based mini banking dashboard with real-time transactions, account manage
 
 **Real-time Transaction Dashboard**
 - View all transactions with running balance
-- Filter by category, and search
+- Filter by category, date range and search
 - Responsive design (360px to desktop)
 
 **Secure Money Transfers**
@@ -16,6 +16,7 @@ A React-based mini banking dashboard with real-time transactions, account manage
 **State Management**
 - Built with Zustand for predictable state
 - Optimistic updates for smooth UX
+- Use createJSONStorage and persist from Zustand middleware to persist the data
 
 **Security & Best Practices**
 - No sensitive data logged in console
