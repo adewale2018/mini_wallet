@@ -1,6 +1,6 @@
 # Mini Wallet Dashboard
 
-A React-based mini banking dashboard with real-time transactions, account management, and money transfer capabilities.
+A React-based mini banking dashboard with real-time transactions, account management, and money transfer capabilities. Visit the app here [Mini Wallet Dashboard](https://miniwalletapp.netlify.app/)
 
 ## Features
 
@@ -17,6 +17,7 @@ A React-based mini banking dashboard with real-time transactions, account manage
 - Built with Zustand for predictable state
 - Optimistic updates for smooth UX
 - Use createJSONStorage and persist from Zustand middleware to persist the data
+- Deployed on Netlify
 
 **Security & Best Practices**
 - No sensitive data logged in console
