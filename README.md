@@ -39,9 +39,9 @@ A React-based mini banking dashboard with real-time transactions, account manage
 
 ## Setup Instructions
 
-1. **Clone and install:**
+ **Clone and install:**
 ```bash
-git clone <https://github.com/adewale2018/mini_wallet.git>
+git clone https://github.com/adewale2018/mini_wallet.git
 cd mini_wallet
 npm install
-then run `npm run dev` to start the application
+npm run dev to start the application
